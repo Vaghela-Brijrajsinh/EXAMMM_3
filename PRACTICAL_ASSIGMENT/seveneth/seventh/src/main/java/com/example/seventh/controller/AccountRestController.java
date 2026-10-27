@@ -60,21 +60,24 @@ public class AccountRestController {
         return "Amount Transferred Successfully";
     }
 
-    // Update Account
-    @PutMapping("/{id}")
-    public Account updateAccount(
-            @PathVariable Integer id,
-            @RequestBody Account account) {
 
-        Account existing = repository.findById(id).orElse(null);
+ // Update Account
+ @PutMapping("/{id}")
+ public Account updateAccount(
+         @PathVariable Integer id,
+         @RequestBody Account account) {
 
-        if (existing == null)
-            return null;
+     Account existing = repository.findById(id).orElse(null);
 
-        existing.setAccountHolder(account.getAccountHolder());
+     if (existing == null)
+         return null;
 
-        return repository.save(existing);
-    }
+     existing.setAccountHolder(account.getAccountHolder());
+     existing.setBalance(account.getBalance());
+
+     return repository.save(existing);
+ }
+
 
     // Delete Account
     @DeleteMapping("/{id}")
